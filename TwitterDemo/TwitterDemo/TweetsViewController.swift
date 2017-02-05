@@ -12,7 +12,9 @@ class TweetsViewController: UIViewController {
     var tweets: [Tweet]!
 
     override func viewDidLoad() {
+
         super.viewDidLoad()
+
 
         // Do any additional setup after loading the view.
         TwitterClient.sharedInstance!.homeTimeLine(success: { (tweets: [Tweet]) in
@@ -22,10 +24,26 @@ class TweetsViewController: UIViewController {
         })
     }
 
+
+    @IBAction func onLogoutButton(_ sender: Any) {
+        TwitterClient.sharedInstance?.logout()
+    }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
     /*

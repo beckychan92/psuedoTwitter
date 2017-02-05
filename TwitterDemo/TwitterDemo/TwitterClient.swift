@@ -10,7 +10,7 @@ import UIKit
 import BDBOAuth1Manager
 
 class TwitterClient: BDBOAuth1SessionManager {
-    
+        
     var consumerKey: String!
     var consumerSecret: String!
     
@@ -32,15 +32,16 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func currentAccount(){
+    func currentAccount(success: @escaping (User) -> (), failure: @escaping (Error) -> ()){
         get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: {
             (task: URLSessionDataTask, response: Any?) -> Void in
             let userDict = response as! NSDictionary
             let user = User(dictonary: userDict)
-            print(user.screenname!)
+            success(user)
             
         }, failure: {
             (task: URLSessionDataTask?, error: Error) -> Void in
+                failure(error)
         })
     }
     
@@ -63,12 +64,22 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func logout(){
+        deauthorize()
+        User.currentUser = nil
+        NotificationCenter.default.post(name: User.userDidLogout, object: nil)
+    }
+    
     func handleOpenUrl(url: URL){
         let requestToken = BDBOAuth1Credential(queryString: url.query)
         
-        fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken,
-                                success: { (accessToken: BDBOAuth1Credential?) -> Void in
-                                        self.loginSuccess?()
+        fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential?) -> Void in
+                self.currentAccount(success: { (user: User) -> () in
+                    User.currentUser = user
+                    self.loginSuccess?()
+                }, failure: { (error: Error) in
+                    self.loginFailure?(error)
+                })
 //                                    client.homeTimeLine(success: { (tweets:[Tweet]) in
 //                                        for tweet in tweets{
 //                                            print(tweet.text)
@@ -76,9 +87,9 @@ class TwitterClient: BDBOAuth1SessionManager {
 //                                    }, failure: { (error: Error) in
 //                                        print(error.localizedDescription)
 //                                    })
-                                }, failure: { (error: Error?) -> Void in
-                                    self.loginFailure?(error!)
-                                })
+            }, failure: { (error: Error?) -> Void in
+                self.loginFailure?(error!)
+            })
     }
     
 

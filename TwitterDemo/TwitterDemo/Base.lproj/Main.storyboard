@@ -72,7 +72,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="MT3-GA-MJR"/>
+                    <navigationItem key="navigationItem" id="MT3-GA-MJR">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Jzi-sj-smF">
+                            <connections>
+                                <action selector="onLogoutButton:" destination="nbo-kR-75O" id="ea6-6u-2U0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etm-HA-3ff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -81,7 +87,7 @@
         <!--Navigation Controller-->
         <scene sceneID="IsU-YJ-C6I">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2fB-gY-O3Y" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="2fB-gY-O3Y" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yrk-7F-sdJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -98,6 +104,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="12a-gt-t9f"/>
+        <segue reference="2Z4-nq-VgC"/>
     </inferredMetricsTieBreakers>
 </document>
