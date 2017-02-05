@@ -75,29 +75,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
                 twitterClient?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: {
                     (task: URLSessionDataTask, response: Any?) -> Void in
-                        print("account: \(response)")
-                        let user = response as! NSDictionary
-                        print("name: \(user["name"])")
+                        let userDict = response as! NSDictionary
+                        let user = User(dictonary: userDict)
+                        print(user.screenname!)
+                    
                 }, failure: {
                     (task: URLSessionDataTask?, error: Error) -> Void in
-                        print("I got an error in verify_credentials")
                 })
                 print("second call")
                 twitterClient?.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: {
                     (task: URLSessionDataTask, response: Any?) -> Void in
-                        let tweets = response as! [NSDictionary]
+                        let dictonaries = response as! [NSDictionary]
+                        let tweets = Tweet.tweetsWithArray(dictonaries: dictonaries)
                         for tweet in tweets{
-                            print("\(tweet["text"]!)")
+                        print("tweet: \(tweet.text!)")
                         }
+
                 }, failure: {
                     (task: URLSessionDataTask?, error: Error) -> Void in
-                        print("i got an error in home_timeline")
                 })
             
             
         }, failure: {
             (error: Error?) ->Void in
-                print("error: \(error?.localizedDescription)")
             
         })
         

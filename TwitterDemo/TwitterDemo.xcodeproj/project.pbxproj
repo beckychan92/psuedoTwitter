@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		487218291E405780000159E9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487218281E405780000159E9 /* LoginViewController.swift */; };
+		48C8A07D1E46CCAE0068C30B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C8A07C1E46CCAE0068C30B /* User.swift */; };
+		48C8A07F1E46CCBC0068C30B /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C8A07E1E46CCBC0068C30B /* Tweet.swift */; };
 		48F5E8021E46BDE7003CC5B5 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48F5E8011E46BDE7003CC5B5 /* Keys.plist */; };
 		48FFC58E1E404ABB00476AB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFC58D1E404ABB00476AB1 /* AppDelegate.swift */; };
 		48FFC5931E404ABB00476AB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48FFC5911E404ABB00476AB1 /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* Begin PBXFileReference section */
 		346D72C65FF8D8F2D42E1408 /* Pods-TwitterDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterDemo/Pods-TwitterDemo.release.xcconfig"; sourceTree = "<group>"; };
 		487218281E405780000159E9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		48C8A07C1E46CCAE0068C30B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		48C8A07E1E46CCBC0068C30B /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		48F5E8011E46BDE7003CC5B5 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		48FFC58A1E404ABB00476AB1 /* TwitterDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48FFC58D1E404ABB00476AB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +54,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		48C8A0791E46CC820068C30B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				48C8A07C1E46CCAE0068C30B /* User.swift */,
+				48C8A07E1E46CCBC0068C30B /* Tweet.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		48C8A07A1E46CC880068C30B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				487218281E405780000159E9 /* LoginViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		48C8A07B1E46CC900068C30B /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		48FFC5811E404ABA00476AB1 = {
 			isa = PBXGroup;
 			children = (
@@ -71,12 +99,14 @@
 		48FFC58C1E404ABB00476AB1 /* TwitterDemo */ = {
 			isa = PBXGroup;
 			children = (
+				48C8A07B1E46CC900068C30B /* API */,
+				48C8A07A1E46CC880068C30B /* Controllers */,
+				48C8A0791E46CC820068C30B /* Models */,
 				48FFC58D1E404ABB00476AB1 /* AppDelegate.swift */,
 				48FFC5911E404ABB00476AB1 /* Main.storyboard */,
 				48FFC5941E404ABB00476AB1 /* Assets.xcassets */,
 				48FFC5961E404ABB00476AB1 /* LaunchScreen.storyboard */,
 				48FFC5991E404ABB00476AB1 /* Info.plist */,
-				487218281E405780000159E9 /* LoginViewController.swift */,
 				48F5E8011E46BDE7003CC5B5 /* Keys.plist */,
 			);
 			path = TwitterDemo;
@@ -218,6 +248,8 @@
 			files = (
 				487218291E405780000159E9 /* LoginViewController.swift in Sources */,
 				48FFC58E1E404ABB00476AB1 /* AppDelegate.swift in Sources */,
+				48C8A07D1E46CCAE0068C30B /* User.swift in Sources */,
+				48C8A07F1E46CCBC0068C30B /* Tweet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
