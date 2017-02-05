@@ -13,28 +13,6 @@ import BDBOAuth1Manager
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var consumerKey: String!
-    var consumerSecret: String!
-    
-    func setKeysFromPlist(){
-        var keys: NSDictionary?
-        
-        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
-            keys = NSDictionary(contentsOfFile: path)
-        }else{
-            print("found no bundle")
-        }
-        if let dict = keys {
-            self.consumerKey = dict["consumerKey"] as! String
-            self.consumerSecret = dict["consumerSecret"] as! String
-            print("keys set appdelegate")
-            
-        }else{
-            print("found no key")
-        }
-        
-    }
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -64,45 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        print(url.description)
-        let requestToken = BDBOAuth1Credential(queryString: url.query)
-        self.setKeysFromPlist()
-        let twitterClient = BDBOAuth1SessionManager(baseURL: URL(string: "https://api.twitter.com")! , consumerKey: self.consumerKey, consumerSecret: self.consumerSecret)
-        
-        twitterClient?.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: {
-            (accessToken: BDBOAuth1Credential?) -> Void in
-                print ("I got an access token. Do first call")
-            
-                twitterClient?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: {
-                    (task: URLSessionDataTask, response: Any?) -> Void in
-                        let userDict = response as! NSDictionary
-                        let user = User(dictonary: userDict)
-                        print(user.screenname!)
-                    
-                }, failure: {
-                    (task: URLSessionDataTask?, error: Error) -> Void in
-                })
-                print("second call")
-                twitterClient?.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: {
-                    (task: URLSessionDataTask, response: Any?) -> Void in
-                        let dictonaries = response as! [NSDictionary]
-                        let tweets = Tweet.tweetsWithArray(dictonaries: dictonaries)
-                        for tweet in tweets{
-                        print("tweet: \(tweet.text!)")
-                        }
-
-                }, failure: {
-                    (task: URLSessionDataTask?, error: Error) -> Void in
-                })
-            
-            
-        }, failure: {
-            (error: Error?) ->Void in
-            
-        })
-        
-        
-        
+        TwitterClient.sharedInstance!.handleOpenUrl(url: url)
         return true
     }
 
