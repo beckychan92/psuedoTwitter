@@ -28,7 +28,6 @@ class Tweet: NSObject {
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
             timestamp = formatter.date(from: timestampString)
             timestampStr = formatter.string(from: timestamp!)
-
         }
 
     }
