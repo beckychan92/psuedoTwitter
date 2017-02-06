@@ -28,6 +28,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         // Do any additional setup after loading the view.
         TwitterClient.sharedInstance.homeTimeLine(success: { (tweets: [Tweet]) in
             self.tweets = tweets
+            for tweet in tweets{
+                print("tweet: \(tweet.text!)")
+            }
             self.tableView.reloadData()
         }, failure: {(error: Error) -> () in
             print("Error in 'tweet viewDidLoad': \(error.localizedDescription)")

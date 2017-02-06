@@ -8,19 +8,32 @@
 
 import UIKit
 import BDBOAuth1Manager
+let twitterConsumerKey = "put key here"
+let twitterConsumerSecret = "put secret here"
 
 class TwitterClient: BDBOAuth1SessionManager {
     
-    static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: ValueFromPlist().consumerKey, consumerSecret: ValueFromPlist().consumerSecret)!
+    static var sharedInstance: TwitterClient {
+        struct Static {
+            static let instance  = TwitterClient(
+                baseURL: URL(string: "https://api.twitter.com")!,
+                consumerKey: twitterConsumerKey,
+                consumerSecret: twitterConsumerSecret)
+        }
+        
+        return Static.instance!
+    }
+    
+    //static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: ValueFromPlist().consumerKey, consumerSecret: ValueFromPlist().consumerSecret)!
     
     
     // HomeTimeline API
     func homeTimeLine(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()){
         get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: {
             (task: URLSessionDataTask, response: Any?) -> Void in
-                let dictonaries = response as! [NSDictionary]
+                let dict = response as! [NSDictionary]
                 print("homeTimeline success")
-                let tweets = Tweet.tweetsWithArray(dictonaries: dictonaries)
+                let tweets = Tweet.tweetsWithArray(dictonaries: dict)
                 success(tweets)
         
         }, failure: {
@@ -53,7 +66,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     func login(success: @escaping () -> (), failure: @escaping (Error) -> ()){
         loginSuccess = success
         loginFailure = failure
-        deauthorize()
+        TwitterClient.sharedInstance.deauthorize()
         
         fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: URL(string: "twitterdemo://oauth")!, scope: nil, success: { (requestToken: BDBOAuth1Credential?) -> Void in
                 print("I got a token, so logining in: \(requestToken!.token!)")
