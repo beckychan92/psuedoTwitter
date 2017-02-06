@@ -58,6 +58,55 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    //favorite API
+    func favorite(params: NSDictionary?, success: @escaping () -> (), failure: @escaping (Error) -> ()){
+        post("1.1/favorites/create.json", parameters: params, success: { (operation: URLSessionDataTask, response: Any) -> Void in
+                print("succesful favorite")
+                success()
+        }, failure: { (operation: URLSessionDataTask?, error: Error?) -> Void in
+            print("Couldn't favorite tweet")
+            failure(error!)
+        }
+        )
+    }
+    
+    func unfavorite(params: NSDictionary?,  success: @escaping () -> (), failure: @escaping (Error) -> () ){
+        post("1.1/favorites/destroy.json", parameters: params, success: { (operation: URLSessionDataTask!, response: Any?) -> Void in
+                print("succesful unfavorite")
+                success()
+        }, failure: { (operation: URLSessionDataTask?, error: Error?) -> Void in
+            print("Couldn't favorite tweet")
+            failure(error!)
+        }
+        )
+    }
+    
+    //retweet API
+    
+    func retweet(id: Int, success: @escaping () -> (), failure: @escaping (Error) -> () ){
+        post("1.1/statuses/retweet/\(id).json", parameters: nil, success: { (operation: URLSessionDataTask!, response: Any?) -> Void in
+                print("succesful retweet")
+                success()
+        }, failure: { (operation: URLSessionDataTask?, error: Error!) -> Void in
+            print("Couldn't retweet")
+            failure(error!)
+        }
+        )
+        
+        
+    }
+    
+    func unretweet(id: Int, success: @escaping () -> (), failure: @escaping (Error) -> () ){
+        post("1.1/statuses/unretweet/\(id).json", parameters: nil, success: { (operation: URLSessionDataTask!, response: Any?) -> Void in
+                print("succesful unretweet")
+                success()
+        }, failure: { (operation: URLSessionDataTask?, error: Error?) -> Void in
+            print("Couldn't unretweet")
+            failure(error!)
+        }
+        )
+    }
+    
     var loginSuccess: (() -> ())?
     var loginFailure: ((Error) -> ())?
     

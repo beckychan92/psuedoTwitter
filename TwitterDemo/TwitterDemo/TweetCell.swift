@@ -10,11 +10,15 @@ import UIKit
 
 class TweetCell: UITableViewCell {
     
+    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabe: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
+    @IBOutlet weak var retweetCountLabel: UILabel!
     var tweet: Tweet! {
         
         didSet {
@@ -23,23 +27,24 @@ class TweetCell: UITableViewCell {
             timestampLabel.text = tweet.timestampStr!
             nameLabel.text = tweet.user?.name!
             screenNameLabe.text = "@\(tweet.user!.screenname!)"
+            favoriteCountLabel.text = "\(tweet.favoritesCount)"
+            retweetCountLabel.text = "\(tweet.retweetCount)"
             
             if let profileURL = tweet.user?.profileUrl{
                 profileImage.setImageWith(profileURL as URL)
             }
             
-//            retweetCountLabel.text = String(describing: tweet.retweetCount!)
-//            favCountLabel.text = String(describing: tweet.favoritesCount!)
-//            
-//            tweetID = tweet.id!
-//            if tweet.idStr != 0 {
-//                originalTweetID = tweet.idStr
-//                print("original tweet is : \(originalTweetID)")
-//            }
-//             
-//            favStatus = tweet.favorited!
-//            retweetStatus = tweet.retweeted!
-//            
+            if tweet.favorited{
+                favoriteButton.setImage(UIImage(named: "didlike"), for: UIControlState())
+            }else{
+                favoriteButton.setImage(UIImage(named: "like"), for: UIControlState())
+            }
+            
+            if tweet.retweeted{
+                retweetButton.setImage(UIImage(named: "repost"), for: UIControlState())
+            }else{
+                retweetButton.setImage(UIImage(named: "notRepost"), for: UIControlState())
+            }
 
         }
     }
