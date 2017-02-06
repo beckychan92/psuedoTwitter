@@ -20,7 +20,13 @@ class TweetCell: UITableViewCell {
         didSet {
             
             tweetTextLabel.text = tweet.text
-            timestampLabel.text = String(describing: tweet.timestamp!)
+            timestampLabel.text = tweet.timestampStr!
+            nameLabel.text = tweet.user?.name!
+            screenNameLabe.text = "@\(tweet.user!.screenname!)"
+            
+            if let profileURL = tweet.user?.profileUrl{
+                profileImage.setImageWith(profileURL as URL)
+            }
             
 //            retweetCountLabel.text = String(describing: tweet.retweetCount!)
 //            favCountLabel.text = String(describing: tweet.favoritesCount!)
@@ -30,16 +36,11 @@ class TweetCell: UITableViewCell {
 //                originalTweetID = tweet.idStr
 //                print("original tweet is : \(originalTweetID)")
 //            }
-//            
-//            nameLabel.text = tweet.user?.name!
-//            screenNameLabel.text = ("@" + (tweet.user?.screenname!)!)
-//            
+//             
 //            favStatus = tweet.favorited!
 //            retweetStatus = tweet.retweeted!
 //            
-//            if let profileUrl = tweet.user?.profileUrl {
-//                profileImage.setImageWith(profileUrl)
-//            }
+
         }
     }
 
@@ -47,6 +48,8 @@ class TweetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        profileImage.layer.cornerRadius = 3
+        profileImage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

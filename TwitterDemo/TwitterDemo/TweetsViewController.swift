@@ -9,7 +9,7 @@
 import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var tweets: [Tweet]!
+    var tweets: [Tweet]?
     @IBOutlet weak var tableView: UITableView!
 
     
@@ -28,9 +28,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         // Do any additional setup after loading the view.
         TwitterClient.sharedInstance.homeTimeLine(success: { (tweets: [Tweet]) in
             self.tweets = tweets
-            for tweet in tweets{
-                print("tweet: \(tweet.text!)")
-            }
             self.tableView.reloadData()
         }, failure: {(error: Error) -> () in
             print("Error in 'tweet viewDidLoad': \(error.localizedDescription)")
@@ -47,14 +44,12 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     //Table code
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return (tweets?.count) ?? 0
-    }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
-        let tweet = tweets[indexPath.row]
+        let tweet = tweets?[indexPath.row]
         
         cell.tweet = tweet
         
@@ -62,8 +57,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 1
+        return self.tweets?.count ?? 0
     }
     
     

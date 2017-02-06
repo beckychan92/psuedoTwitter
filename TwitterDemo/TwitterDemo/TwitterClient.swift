@@ -8,8 +8,8 @@
 
 import UIKit
 import BDBOAuth1Manager
-let twitterConsumerKey = "put key here"
-let twitterConsumerSecret = "put secret here"
+let twitterConsumerKey = ValueFromPlist().consumerKey
+let twitterConsumerSecret = ValueFromPlist().consumerSecret
 
 class TwitterClient: BDBOAuth1SessionManager {
     
@@ -30,7 +30,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     // HomeTimeline API
     func homeTimeLine(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()){
         get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: {
-            (task: URLSessionDataTask, response: Any?) -> Void in
+            (task: URLSessionDataTask, response: Any) -> Void in
                 let dict = response as! [NSDictionary]
                 print("homeTimeline success")
                 let tweets = Tweet.tweetsWithArray(dictonaries: dict)
@@ -94,6 +94,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     //Handle Open URL API
     func handleOpenUrl(url: URL){
         let requestToken = BDBOAuth1Credential(queryString: url.query)
+        
         
         fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential?) -> Void in
                 print("fetch access token in handle openURL success")
