@@ -24,10 +24,10 @@ class User: NSObject {
             profileUrl = NSURL(string: profUrl)
         }
         tagline = dictonary["description"] as? String
-
+        print("User init set. User is \(name!)")
     }
     
-    static let  userDidLogout = NSNotification.Name(rawValue: "UserDidLogout")
+    static let userDidLogout = NSNotification.Name(rawValue: "UserDidLogout")
     
     static var _currentUser: User?
     
@@ -36,12 +36,12 @@ class User: NSObject {
 
             if _currentUser == nil{
                 let defaults = UserDefaults.standard
-                let userData = defaults.object(forKey: "currentUser") as? Data
-                print(userData!)
-                print("I ran")
+                let userData = defaults.object(forKey: "currentUserData") as? Data
             
                 if let userData = userData{
+                    print("I found data cached")
                     if let dictionary = try? JSONSerialization.jsonObject(with: userData, options: .allowFragments){
+                        print("I deserialized the data")
                         _currentUser = User(dictonary: dictionary as! NSDictionary)
                     }
                 }
@@ -55,10 +55,10 @@ class User: NSObject {
             if let user = user{
                 let data = try! JSONSerialization.data(withJSONObject: user.dictonary!, options: [])
 
-                defaults.set(data, forKey: "currentUser")
+                defaults.set(data, forKey: "currentUserData")
 
             }else{
-                defaults.set(nil, forKey: "currentUser")
+                defaults.set(nil, forKey: "currentUserData")
             }
             defaults.synchronize()
             

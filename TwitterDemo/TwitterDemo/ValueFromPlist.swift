@@ -17,27 +17,17 @@ class ValueFromPlist: NSObject {
         if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
             keys = NSDictionary(contentsOfFile: path)
         }else{
-            print("found no bundle")
+            print("Found no bundle")
         }
         
         if let dict = keys {
             self.consumerKey = dict["consumerKey"] as! String
             self.consumerSecret = dict["consumerSecret"] as! String
-            print("keys set viewcontroller")
+            print("Keys.plist read. ConsumerKey is \(consumerKey)")
         }else{
-            print("found no key")
+            print("found no key in Keys.plist")
         }
         
     }
-    
-//    class func getConsumeKey() -> String {
-//        let VFP = ValueFromPlist()
-//        return VFP.consumerKey
-//    }
-//    
-//    class func getConsumeSecret() -> String {
-//        let VFP = ValueFromPlist()
-//        return VFP.consumerSecret
-//    }
 
 }

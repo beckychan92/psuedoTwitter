@@ -29,9 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         NotificationCenter.default.addObserver(forName: User.userDidLogout, object: nil, queue: OperationQueue.main, using: { (Notification) -> Void in
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyBoard.instantiateInitialViewController()
-            self.window?.rootViewController = vc
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyBoard.instantiateInitialViewController()
+                self.window?.rootViewController = vc
         })
         
 
@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        TwitterClient.sharedInstance!.handleOpenUrl(url: url)
+        TwitterClient.sharedInstance.handleOpenUrl(url: url)
         return true
     }
 

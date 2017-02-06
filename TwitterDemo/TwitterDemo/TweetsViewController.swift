@@ -26,17 +26,17 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 
 
         // Do any additional setup after loading the view.
-        TwitterClient.sharedInstance!.homeTimeLine(success: { (tweets: [Tweet]) in
+        TwitterClient.sharedInstance.homeTimeLine(success: { (tweets: [Tweet]) in
             self.tweets = tweets
             self.tableView.reloadData()
         }, failure: {(error: Error) -> () in
-            print(error.localizedDescription)
+            print("Error in 'tweet viewDidLoad': \(error.localizedDescription)")
         })
     }
 
 
     @IBAction func onLogoutButton(_ sender: Any) {
-        TwitterClient.sharedInstance?.logout()
+        TwitterClient.sharedInstance.logout()
     }
     
     
@@ -45,7 +45,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     //Table code
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tweets?.count ?? 0
+        return (tweets?.count) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

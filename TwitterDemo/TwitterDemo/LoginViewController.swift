@@ -17,21 +17,13 @@ class LoginViewController: UIViewController {
        
         // Do any additional setup after loading the view.
     }
-
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func onLoginButton(_ sender: Any) {
-        let client = TwitterClient.sharedInstance!
-        client.login(success: { () -> () in
+        TwitterClient.sharedInstance.login(success: { () -> () in
             print("I've logged in")
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
         }, failure: { (error: Error) -> () in
-            print("Error: \(error.localizedDescription)")
+            print("Error in 'onLoginbButton': \(error.localizedDescription)")
         })
     }
     
