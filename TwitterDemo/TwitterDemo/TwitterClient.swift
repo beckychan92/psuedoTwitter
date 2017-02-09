@@ -11,6 +11,7 @@ import BDBOAuth1Manager
 let twitterConsumerKey = ValueFromPlist().consumerKey
 let twitterConsumerSecret = ValueFromPlist().consumerSecret
 
+
 class TwitterClient: BDBOAuth1SessionManager {
     
     static var sharedInstance: TwitterClient {
@@ -60,7 +61,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     //favorite API
     func favorite(params: NSDictionary?, success: @escaping () -> (), failure: @escaping (Error) -> ()){
-        post("1.1/favorites/create.json", parameters: params, success: { (operation: URLSessionDataTask, response: Any) -> Void in
+        post("1.1/favorites/create.json", parameters: params, progress: nil, success: { (operation: URLSessionDataTask, response: Any) -> Void in
                 print("succesful favorite")
                 success()
         }, failure: { (operation: URLSessionDataTask?, error: Error?) -> Void in
@@ -71,7 +72,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func unfavorite(params: NSDictionary?,  success: @escaping () -> (), failure: @escaping (Error) -> () ){
-        post("1.1/favorites/destroy.json", parameters: params, success: { (operation: URLSessionDataTask!, response: Any?) -> Void in
+        post("1.1/favorites/destroy.json", parameters: params, progress: nil, success: { (operation: URLSessionDataTask!, response: Any?) -> Void in
                 print("succesful unfavorite")
                 success()
         }, failure: { (operation: URLSessionDataTask?, error: Error?) -> Void in
@@ -84,7 +85,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     //retweet API
     
     func retweet(id: Int, success: @escaping () -> (), failure: @escaping (Error) -> () ){
-        post("1.1/statuses/retweet/\(id).json", parameters: nil, success: { (operation: URLSessionDataTask!, response: Any?) -> Void in
+        post("1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil, success: { (operation: URLSessionDataTask!, response: Any?) -> Void in
                 print("succesful retweet")
                 success()
         }, failure: { (operation: URLSessionDataTask?, error: Error!) -> Void in
@@ -97,7 +98,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func unretweet(id: Int, success: @escaping () -> (), failure: @escaping (Error) -> () ){
-        post("1.1/statuses/unretweet/\(id).json", parameters: nil, success: { (operation: URLSessionDataTask!, response: Any?) -> Void in
+        post("1.1/statuses/unretweet/\(id).json", parameters: nil, progress: nil, success: { (operation: URLSessionDataTask!, response: Any?) -> Void in
                 print("succesful unretweet")
                 success()
         }, failure: { (operation: URLSessionDataTask?, error: Error?) -> Void in

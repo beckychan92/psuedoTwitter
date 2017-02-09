@@ -89,9 +89,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let indexPath = tableView.indexPath(for: cell)
         let tweet = tweets![indexPath!.row]
         
-        
+//        id	Int	828821762188075008
         if !(tweet.favorited){
-            TwitterClient.sharedInstance.favorite(params: ["id": tweet.id], success: {
+            TwitterClient.sharedInstance.favorite(params: ["id": tweet.idStr], success: {
                 () in
                 print("like!")
                 self.tweets![indexPath!.row].favoritesCount += 1
