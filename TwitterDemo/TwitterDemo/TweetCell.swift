@@ -34,13 +34,13 @@ class TweetCell: UITableViewCell {
                 profileImage.setImageWith(profileURL as URL)
             }
             
-            if tweet.favorited{
+            if (tweet.favoritesCount > 0){
                 favoriteButton.setImage(UIImage(named: "didlike"), for: UIControlState())
             }else{
                 favoriteButton.setImage(UIImage(named: "like"), for: UIControlState())
             }
             
-            if tweet.retweeted{
+            if (tweet.retweetCount > 0){
                 retweetButton.setImage(UIImage(named: "repost"), for: UIControlState())
             }else{
                 retweetButton.setImage(UIImage(named: "notRepost"), for: UIControlState())

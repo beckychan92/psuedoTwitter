@@ -25,7 +25,6 @@ class TwitterClient: BDBOAuth1SessionManager {
         return Static.instance!
     }
     
-    //static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: ValueFromPlist().consumerKey, consumerSecret: ValueFromPlist().consumerSecret)!
     
     
     // HomeTimeline API

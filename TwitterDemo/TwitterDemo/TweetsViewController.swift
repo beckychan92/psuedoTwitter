@@ -59,7 +59,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             TwitterClient.sharedInstance.retweet(id: tweet.id, success: {
                 () in
                     print("repost!")
-                    self.tweets![indexPath!.row].favoritesCount += 1
+                    self.tweets![indexPath!.row].retweetCount += 1
                     tweet.retweeted = true
                     cell.retweetButton.setImage(#imageLiteral(resourceName: "repost"), for: UIControlState())
                 
@@ -70,7 +70,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             TwitterClient.sharedInstance.unretweet(id: tweet.id, success: {
                 () in
                     print("unrepost!")
-                    self.tweets![indexPath!.row].favoritesCount -= 1
+                    self.tweets![indexPath!.row].retweetCount -= 1
                     tweet.retweeted = false
                     cell.retweetButton.setImage(#imageLiteral(resourceName: "notRepost"), for: UIControlState())
             }, failure: { (error: Error) in
@@ -89,14 +89,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let indexPath = tableView.indexPath(for: cell)
         let tweet = tweets![indexPath!.row]
         
-//        id	Int	828821762188075008
         if !(tweet.favorited){
             TwitterClient.sharedInstance.favorite(params: ["id": tweet.idStr], success: {
                 () in
                 print("like!")
                 self.tweets![indexPath!.row].favoritesCount += 1
                 tweet.favorited = true
-                cell.retweetButton.setImage(#imageLiteral(resourceName: "didlike"), for: UIControlState())
+                cell.favoriteButton.setImage(#imageLiteral(resourceName: "didlike"), for: UIControlState())
                 
             }, failure: { (error: Error) in
                 print("Error in like'tweet onFavorite': \(error.localizedDescription)")
@@ -107,7 +106,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
                 print("unlike!")
                 self.tweets![indexPath!.row].favoritesCount -= 1
                 tweet.favorited = false
-                cell.retweetButton.setImage(#imageLiteral(resourceName: "like"), for: UIControlState())
+                cell.favoriteButton.setImage(#imageLiteral(resourceName: "like"), for: UIControlState())
             }, failure: { (error: Error) in
                 print("Error in unlike'tweet onFavorite': \(error.localizedDescription)")
             })
