@@ -63,7 +63,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BBA-nU-zEQ" id="Nzt-GV-neq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="129"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Twitter" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EnH-A0-le0">
@@ -200,10 +200,10 @@
             </objects>
             <point key="canvasLocation" x="2338.4000000000001" y="122.78860569715144"/>
         </scene>
-        <!--View Controller-->
+        <!--Tweet Detail View Controller-->
         <scene sceneID="MFh-C8-r8N">
             <objects>
-                <viewController id="rQ0-JK-fZT" sceneMemberID="viewController">
+                <viewController id="rQ0-JK-fZT" customClass="TweetDetailViewController" customModule="TwitterDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fhK-gP-VyU"/>
                         <viewControllerLayoutGuide type="bottom" id="fG2-da-Lig"/>
@@ -276,20 +276,41 @@
                                 <rect key="frame" x="274" y="529" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="like"/>
+                                <connections>
+                                    <action selector="onFavorite:" destination="rQ0-JK-fZT" eventType="touchUpInside" id="Q0o-26-Zxi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2n9-34-QTd">
                                 <rect key="frame" x="148" y="529" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="repost"/>
+                                <connections>
+                                    <action selector="onRetweet:" destination="rQ0-JK-fZT" eventType="touchUpInside" id="6o7-Ca-KOr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8FX-Nv-eiC">
                                 <rect key="frame" x="36" y="529" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="reply"/>
+                                <connections>
+                                    <action selector="onReply:" destination="rQ0-JK-fZT" eventType="touchUpInside" id="6bP-cP-Ozd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="favoriteButton" destination="RPL-tr-SQv" id="MNm-6V-qJq"/>
+                        <outlet property="favoriteCountLabel" destination="Jmr-cr-sbr" id="ojI-9u-529"/>
+                        <outlet property="nameLabel" destination="WDL-q7-tLD" id="zXH-aa-OaA"/>
+                        <outlet property="onRetweet" destination="2n9-34-QTd" id="JZe-Ca-FFg"/>
+                        <outlet property="profileImg" destination="CwF-FN-dkN" id="yyM-fo-Bbc"/>
+                        <outlet property="retweetButton" destination="2n9-34-QTd" id="C4n-df-kDZ"/>
+                        <outlet property="retweetCountLabel" destination="5Vb-UU-9HC" id="Ysx-QM-fcs"/>
+                        <outlet property="screenameLabel" destination="73m-C9-hKS" id="LGY-Pi-5TS"/>
+                        <outlet property="timestampLabel" destination="dxs-Q0-4HM" id="uwQ-2Q-msP"/>
+                        <outlet property="tweetTextLabel" destination="E2K-z9-Sbp" id="zoa-pl-6NO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wy9-uZ-tMR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
