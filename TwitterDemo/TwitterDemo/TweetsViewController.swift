@@ -18,7 +18,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Home Timeline"
+        self.navigationItem.title = "Home"
         
         // Setting up tableview
         tableView.dataSource = self
@@ -166,6 +166,17 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
                 
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        var indexPath = tableView.indexPath(for: sender as! TweetCell)
+        // Get in touch with the DetailViewController
+        var vc = segue.destination as! TweetDetailViewController
+        // Pass on the data to the Detail ViewController by setting it's indexPathRow value
+        let cell = self.tableView(self.tableView, cellForRowAt: indexPath!) as! TweetCell
+        vc.tweet = cell.tweet
     }
     
 

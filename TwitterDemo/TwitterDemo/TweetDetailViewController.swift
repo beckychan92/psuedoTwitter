@@ -32,6 +32,33 @@ class TweetDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         
+        // Set the name
+        self.navigationItem.title = "Tweet"
+
+        
+        // Setup the View
+        tweetTextLabel.text = tweet.text!
+        timestampLabel.text = tweet.timestampStr!
+        nameLabel.text = tweet.user?.name!
+        screenameLabel.text = "@\(tweet.user!.screenname!)"
+        favoriteCountLabel.text = "\(tweet.favoritesCount)"
+        retweetCountLabel.text = "\(tweet.retweetCount)"
+        
+        if let profileURL = tweet.user?.profileUrl{
+            profileImg.setImageWith(profileURL as URL)
+        }
+        
+        if (tweet.favorited){
+            favoriteButton.setImage(UIImage(named: "didlike"), for: UIControlState())
+        }else{
+            favoriteButton.setImage(UIImage(named: "like"), for: UIControlState())
+        }
+        
+        if (tweet.retweeted){
+            retweetButton.setImage(UIImage(named: "repost"), for: UIControlState())
+        }else{
+            retweetButton.setImage(UIImage(named: "notRepost"), for: UIControlState())
+        }
         
     }
 
