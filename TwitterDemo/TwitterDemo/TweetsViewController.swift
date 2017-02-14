@@ -90,7 +90,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let tweet = tweets![indexPath!.row]
         
         if !(tweet.favorited){
-            TwitterClient.sharedInstance.favorite(params: ["id": tweet.idStr], success: {
+            TwitterClient.sharedInstance.favorite(params: ["id": tweet.id], success: {
                 () in
                 print("like!")
                 self.tweets![indexPath!.row].favoritesCount += 1
@@ -171,9 +171,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        var indexPath = tableView.indexPath(for: sender as! TweetCell)
+        let indexPath = tableView.indexPath(for: sender as! TweetCell)
         // Get in touch with the DetailViewController
-        var vc = segue.destination as! TweetDetailViewController
+        let vc = segue.destination as! TweetDetailViewController
         // Pass on the data to the Detail ViewController by setting it's indexPathRow value
         let cell = self.tableView(self.tableView, cellForRowAt: indexPath!) as! TweetCell
         vc.tweet = cell.tweet
