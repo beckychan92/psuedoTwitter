@@ -167,7 +167,7 @@
                                             <outlet property="screenNameLabe" destination="bac-9F-rdl" id="OMd-zD-ojx"/>
                                             <outlet property="timestampLabel" destination="fOi-21-jez" id="Kia-Aw-s3Z"/>
                                             <outlet property="tweetTextLabel" destination="J3S-eH-zXA" id="egJ-C7-eyO"/>
-                                            <segue destination="rQ0-JK-fZT" kind="show" id="xxH-Kf-eZl"/>
+                                            <segue destination="rQ0-JK-fZT" kind="show" id="3tt-Qi-vC1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -358,7 +358,7 @@
                     <navigationItem key="navigationItem" id="RxS-lj-niJ">
                         <barButtonItem key="rightBarButtonItem" title="Reply" id="1CB-0L-XQ7">
                             <connections>
-                                <segue destination="kTp-9K-6oA" kind="showDetail" id="e43-oa-CPy"/>
+                                <segue destination="kTp-9K-6oA" kind="show" id="2Mt-Cf-Jx8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -432,12 +432,24 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="t50-KR-kVz">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="bbQ-Ne-zne"/>
                         <rightBarButtonItems>
-                            <barButtonItem title="Tweet" id="SOo-8S-qcE"/>
-                            <barButtonItem title="140" id="KoB-6e-laK"/>
+                            <barButtonItem title="Tweet" id="SOo-8S-qcE">
+                                <connections>
+                                    <action selector="onTweet:" destination="kTp-9K-6oA" id="1G3-iU-DKp"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="140" id="KoB-6e-laK">
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="charCount" destination="KoB-6e-laK" id="1fX-3I-68I"/>
+                        <outlet property="nameLabel" destination="63X-xC-uan" id="avO-LQ-vGd"/>
+                        <outlet property="profileImg" destination="2zb-LQ-spI" id="w9d-NL-NnT"/>
+                        <outlet property="screenNameLabel" destination="aZn-PV-0gj" id="ZLb-gG-2y0"/>
+                        <outlet property="textSection" destination="RGu-22-yRo" id="YyP-Im-Qhu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AVM-m9-p2B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -461,42 +473,6 @@
             </objects>
             <point key="canvasLocation" x="1034" y="-926"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="iEq-lY-awn">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T7h-QJ-Ztq" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="33U-me-97W">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="kTp-9K-6oA" kind="relationship" relationship="rootViewController" id="7eA-dp-sGq"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zIe-WC-79F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5313" y="-926"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="iJb-RG-Qfv">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a0B-cV-CQz" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dEz-ni-7Rb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="rQ0-JK-fZT" kind="relationship" relationship="rootViewController" id="Vc3-8q-8ML"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Eva-c9-FWN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3569" y="-926"/>
-        </scene>
     </scenes>
     <resources>
         <image name="like" width="350" height="350"/>
@@ -505,7 +481,6 @@
         <image name="repost" width="350" height="350"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vc3-8q-8ML"/>
-        <segue reference="7eA-dp-sGq"/>
+        <segue reference="Ujv-vm-AHE"/>
     </inferredMetricsTieBreakers>
 </document>

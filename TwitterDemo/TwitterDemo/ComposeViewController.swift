@@ -8,10 +8,19 @@
 
 import UIKit
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UIViewController, UITextViewDelegate {
 
+    @IBOutlet weak var charCount: UIBarButtonItem!
+    
+    @IBOutlet weak var screenNameLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profileImg: UIImageView!
+    @IBOutlet weak var textSection: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        textSection.delegate = self
+
 
         // Do any additional setup after loading the view.
     }
@@ -21,7 +30,23 @@ class ComposeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onTweet(_ sender: Any) {
+    }
 
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if  0 < (141 - textSection.text!.characters.count) {
+            charCount.tintColor = UIColor.lightGray
+            charCount.title = "\(140 - textSection.text!.characters.count)"
+        }
+        else{
+            charCount.tintColor = UIColor.red
+            charCount.title = "\(140 - textSection.text!.characters.count)"
+        }
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 
