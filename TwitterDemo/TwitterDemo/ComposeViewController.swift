@@ -9,9 +9,17 @@
 import UIKit
 
 class ComposeViewController: UIViewController, UITextViewDelegate {
+    // Constants
+    let TEXT_LIMIT = 141
+    let DEFAULT_MSG = "What's on your mind?"
+    let GRAY = UIColor.lightGray
+    let RED = UIColor.red
+    
+    // instance vars
+    var can_send = false
+    var tweet: Tweet!
 
     @IBOutlet weak var charCount: UIBarButtonItem!
-    
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImg: UIImageView!
@@ -19,10 +27,19 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textSection.delegate = self
-
-
         // Do any additional setup after loading the view.
+        
+        // Setup the text box
+        textSection.delegate = self
+        textSection.text! = DEFAULT_MSG
+        // Set the count Label
+        charCount.title = "\(TEXT_LIMIT - DEFAULT_MSG.characters.count)"
+        charCount.tintColor = GRAY
+        
+        // set the reply headers
+        screenNameLabel.text = tweet.user?.screenname
+        nameLabel.text = tweet.user?.screenname
+        profileImg.setImageWith((tweet.user?.profileUrl)! as URL)
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,30 +48,24 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func onTweet(_ sender: Any) {
+        if can_send{
+            
+        }
     }
 
     
     func textViewDidChange(_ textView: UITextView) {
-        if  0 < (141 - textSection.text!.characters.count) {
-            charCount.tintColor = UIColor.lightGray
-            charCount.title = "\(140 - textSection.text!.characters.count)"
+        if  (TEXT_LIMIT - textSection.text!.characters.count) > 0 {
+            charCount.tintColor = GRAY
+            charCount.title = "\(TEXT_LIMIT - textSection.text!.characters.count)"
+            self.can_send = true
         }
         else{
-            charCount.tintColor = UIColor.red
-            charCount.title = "\(140 - textSection.text!.characters.count)"
+            charCount.tintColor = RED
+            charCount.title = "\(TEXT_LIMIT - textSection.text!.characters.count)"
+            self.can_send = false
         }
     }
     
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

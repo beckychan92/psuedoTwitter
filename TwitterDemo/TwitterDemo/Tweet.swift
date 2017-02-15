@@ -50,6 +50,14 @@ class Tweet: NSObject {
         return tweets
     }
     
+    class func tweetFromCurrentUser(tweet: Tweet) -> Bool{
+        if let user = tweet.user{
+            return user == User.currentUser
+        }else{
+            return false
+        }
+    }
+    
     
 }
 

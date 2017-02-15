@@ -28,7 +28,6 @@ class TweetDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         
         
@@ -131,5 +130,18 @@ class TweetDetailViewController: UIViewController {
     @IBAction func onReply(_ sender: Any) {
         
     }
+    
+    
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        let vc = segue.destination as! ComposeViewController
+        // Pass on the data to the Detail ViewController by setting it's indexPathRow value
+        vc.tweet = self.tweet
+     }
+    
 
 }
