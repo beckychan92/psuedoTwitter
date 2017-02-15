@@ -171,12 +171,26 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        let indexPath = tableView.indexPath(for: sender as! TweetCell)
-        // Get in touch with the DetailViewController
-        let vc = segue.destination as! TweetDetailViewController
-        // Pass on the data to the Detail ViewController by setting it's indexPathRow value
-        let cell = self.tableView(self.tableView, cellForRowAt: indexPath!) as! TweetCell
-        vc.tweet = cell.tweet
+        if let sender = sender as? TweetCell{
+            let indexPath = tableView.indexPath(for: sender)
+            // Get in touch with the DetailViewController
+            let vc = segue.destination as! TweetDetailViewController
+            // Pass on the data to the Detail ViewController by setting it's indexPathRow value
+            let cell = self.tableView(self.tableView, cellForRowAt: indexPath!) as! TweetCell
+            vc.tweet = cell.tweet
+        }else{
+            //Clicked on profile img
+            let vc = segue.destination as! ProfileViewController
+            let button = sender as! UIButton
+            let view = button.superview!
+            let cell = view.superview as! TweetCell
+            
+            let indexPath = tableView.indexPath(for: cell)
+            let tweet = tweets![indexPath!.row]
+            vc.tweet = tweet
+        
+        }
+
     }
     
 

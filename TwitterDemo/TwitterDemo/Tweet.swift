@@ -35,7 +35,6 @@ class Tweet: NSObject {
         }
         retweeted = dictionary["retweeted"] as! Bool
         favorited = dictionary["favorited"] as! Bool
-        print("dictionary is \(dictionary)")
 
     }
     

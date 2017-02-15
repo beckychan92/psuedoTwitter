@@ -12,7 +12,12 @@ class User: NSObject {
     var name: String?
     var screenname: String?
     var profileUrl: NSURL?
+    var backgroundUrl: URL?
     var tagline: String?
+    var followers: Int
+    var following: Int
+    var tweetCount: Int
+    
     
     var dictonary: NSDictionary?
     
@@ -23,7 +28,14 @@ class User: NSObject {
         if let profUrl = dictonary["profile_image_url_https"] as? String{
             profileUrl = NSURL(string: profUrl)
         }
+        if let backgroundProf = dictonary["profile_background_image_url_https"] as? String{
+            backgroundUrl = URL(string: backgroundProf)
+        }
         tagline = dictonary["description"] as? String
+        followers = dictonary["followers_count"] as! Int
+        following = dictonary["friends_count"] as! Int
+        tweetCount = dictonary["statuses_count"] as! Int
+
         print("User init set. User is \(name!)")
     }
     
