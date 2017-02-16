@@ -30,7 +30,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     // make Tweet
     func compose(params: NSDictionary?, success: @escaping () -> (), failure: @escaping (Error) -> ()  ){
-        let param = params as! [String : Any]
+        let param = params as! [String : String]
         print("this is the param")
         print(param)
 
