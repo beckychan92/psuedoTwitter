@@ -64,7 +64,7 @@ Describe any challenges encountered while building the app.
 
 # Project 5 - *Continue PsuedoTwiter*
 
-Time spent: **17** hours spent in total
+Time spent: **19** hours spent in total
 
 ## User Stories
 
@@ -94,6 +94,8 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
+- [x] added Keys.plist to store keys
+- [x] added library code to handle keys are loaded for twitter sharedinstance
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 

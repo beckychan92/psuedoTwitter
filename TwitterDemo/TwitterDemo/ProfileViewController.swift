@@ -9,7 +9,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    var tweet: Tweet!
+    var tweet: Tweet?
+    var user: User!
     
     @IBOutlet weak var backgroundImg: UIImageView!
     
@@ -25,16 +26,18 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if let tweet = tweet{
+            user = tweet.user
+        }
         
-        profileImg.setImageWith((tweet.user?.profileUrl)! as URL)
-        nameLabel.text = tweet.user?.name
-        screenNameLabel.text = tweet.user?.screenname
-        backgroundImg.setImageWith((tweet.user?.backgroundUrl)!)
-        followerCountLabel.text = "\(tweet.user?.followers)"
-        followingCountLabel.text = "\(tweet.user?.following)"
-        tweetCountLabel.text = "\(tweet.user?.tweetCount)"
+        profileImg.setImageWith((user.profileUrl)! as URL)
+        nameLabel.text = user.name
+        screenNameLabel.text = user.screenname
+        backgroundImg.setImageWith((user.backgroundUrl)!)
+        followerCountLabel.text = user.getFollower()
+        followingCountLabel.text = user.getFollowing()
+        tweetCountLabel.text = user.getStatusCount()
         backgroundImg.sizeToFit()
-        profileImg.sizeToFit()
         
     }
 

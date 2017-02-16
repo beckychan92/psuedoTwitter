@@ -14,9 +14,9 @@ class User: NSObject {
     var profileUrl: NSURL?
     var backgroundUrl: URL?
     var tagline: String?
-    var followers: Int
-    var following: Int
-    var tweetCount: Int
+    var followers: Int?
+    var following: Int?
+    var tweetCount: Int?
     
     
     var dictonary: NSDictionary?
@@ -25,19 +25,45 @@ class User: NSObject {
         self.dictonary = dictonary
         name = dictonary["name"] as? String
         screenname = dictonary["screen_name"] as? String
+        
         if let profUrl = dictonary["profile_image_url_https"] as? String{
             profileUrl = NSURL(string: profUrl)
         }
         if let backgroundProf = dictonary["profile_background_image_url_https"] as? String{
             backgroundUrl = URL(string: backgroundProf)
         }
+        
         tagline = dictonary["description"] as? String
-        followers = dictonary["followers_count"] as! Int
-        following = dictonary["friends_count"] as! Int
-        tweetCount = dictonary["statuses_count"] as! Int
+        followers = dictonary["followers_count"] as? Int
+        following = dictonary["friends_count"] as? Int
+        tweetCount = dictonary["statuses_count"] as? Int
 
         print("User init set. User is \(name!)")
     }
+    
+    func getFollower() -> String{
+        if let followers = self.followers{
+            return String(describing: followers)
+        }else{
+            return "0"
+        }
+    }
+    func getFollowing() -> String{
+        if let following = self.following{
+            return String(describing: following)
+        }else{
+            return "0"
+        }
+    }
+    func getStatusCount() -> String{
+        if let tweetCount = self.tweetCount{
+            return String(describing: tweetCount)
+        }else{
+            return "0"
+        }
+    }
+    
+
     
     static let userDidLogout = NSNotification.Name(rawValue: "UserDidLogout")
     

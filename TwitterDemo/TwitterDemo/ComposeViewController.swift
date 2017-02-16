@@ -17,7 +17,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     // instance vars
     var can_send = false
-    var tweet: Tweet!
+    var tweet: Tweet?
+    var user: User!
 
     @IBOutlet weak var charCount: UIBarButtonItem!
     @IBOutlet weak var screenNameLabel: UILabel!
@@ -28,6 +29,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        if let tweet = tweet{
+            user = tweet.user
+        }
+        
         
         // Setup the text box
         textSection.delegate = self
@@ -37,9 +42,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         charCount.tintColor = GRAY
         
         // set the reply headers
-        screenNameLabel.text = tweet.user?.screenname
-        nameLabel.text = tweet.user?.screenname
-        profileImg.setImageWith((tweet.user?.profileUrl)! as URL)
+        screenNameLabel.text = user.screenname
+        nameLabel.text = user.screenname
+        profileImg.setImageWith((user.profileUrl)! as URL)
     }
 
     override func didReceiveMemoryWarning() {
