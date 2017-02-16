@@ -16,8 +16,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     let RED = UIColor.red
     
     // instance vars
-    var can_send = false
-    var tweet: Tweet!
+    var can_send = true
+    var tweet: Tweet?
+    var user: User!
 
     @IBOutlet weak var charCount: UIBarButtonItem!
     @IBOutlet weak var screenNameLabel: UILabel!
@@ -28,6 +29,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        if let tweet = tweet{
+            user = tweet.user
+        }
+        
         
         // Setup the text box
         textSection.delegate = self
@@ -37,9 +42,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         charCount.tintColor = GRAY
         
         // set the reply headers
-        screenNameLabel.text = tweet.user?.screenname
-        nameLabel.text = tweet.user?.screenname
-        profileImg.setImageWith((tweet.user?.profileUrl)! as URL)
+        screenNameLabel.text = user.screenname
+        nameLabel.text = user.screenname
+        profileImg.setImageWith((user.profileUrl)! as URL)
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,8 +53,29 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func onTweet(_ sender: Any) {
+        let msg = textSection.text!
+//        let escapedMsg = msg.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
         if can_send{
-            
+            if(user == User.currentUser){
+                
+                TwitterClient.sharedInstance.compose(params: ["status": msg], success: {
+                    () in
+                    print("message compose sent!")
+                }, failure: { (error: Error) in
+                    print("Error in composeView 'compose onTweet': \(error.localizedDescription)")
+
+                })
+
+            }else{
+                
+                TwitterClient.sharedInstance.reply(params: ["status": msg, "in_reply_to_status_id": tweet!.id ], success: {
+                    () in
+                    print("message reply sent!")
+                }, failure: { (error: Error) in
+                    print("Error in composeView 'reply onTweet': \(error.localizedDescription)")
+                })
+            }
         }
     }
 

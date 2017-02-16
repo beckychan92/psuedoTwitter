@@ -27,6 +27,38 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     
     
+    
+    // make Tweet
+    func compose(params: NSDictionary?, success: @escaping () -> (), failure: @escaping (Error) -> ()  ){
+        let param = params as! [String : String]
+        print("this is the param")
+        print(param)
+
+        post("1.1/statuses/update.json", parameters: param, progress: nil,  success: { (operation: URLSessionDataTask!, response: Any?) -> Void in
+            print("tweeting!")
+            success()
+        }, failure: { (operation: URLSessionDataTask?, error: Error?) -> Void in
+            print("Couldn't compose")
+            failure(error!)
+        }
+        )
+    }
+    
+    //reply to tweet
+    func reply(params: NSDictionary?, success: @escaping () -> (), failure: @escaping (Error) -> ()  ){
+        let param = params as! [String : Any]
+        print("this is the param")
+        print(param)
+        
+        post("1.1/statuses/update.json", parameters: param, progress: nil, success: { (operation: URLSessionDataTask!, response: Any?) -> Void in
+            print("reply!")
+            success()
+        }, failure: { (operation: URLSessionDataTask?, error: Error?) -> Void in
+            print("Couldn't reply")
+            failure(error!)
+        })
+    }
+    
     // HomeTimeline API
     func homeTimeLine(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()){
         get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: {
