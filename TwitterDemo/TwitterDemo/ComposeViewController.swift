@@ -16,7 +16,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     let RED = UIColor.red
     
     // instance vars
-    var can_send = false
+    var can_send = true
     var tweet: Tweet?
     var user: User!
 
@@ -53,8 +53,29 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func onTweet(_ sender: Any) {
+        let msg = textSection.text!
+//        let escapedMsg = msg.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
         if can_send{
-            
+            if(user == User.currentUser){
+                
+                TwitterClient.sharedInstance.compose(params: ["status": msg], success: {
+                    () in
+                    print("message compose sent!")
+                }, failure: { (error: Error) in
+                    print("Error in composeView 'compose onTweet': \(error.localizedDescription)")
+
+                })
+
+            }else{
+                
+                TwitterClient.sharedInstance.reply(params: ["status": msg, "in_reply_to_status_id": tweet!.id ], success: {
+                    () in
+                    print("message reply sent!")
+                }, failure: { (error: Error) in
+                    print("Error in composeView 'reply onTweet': \(error.localizedDescription)")
+                })
+            }
         }
     }
 
